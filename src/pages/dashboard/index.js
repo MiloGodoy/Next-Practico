@@ -1,7 +1,6 @@
 import endPoints from '@services/api';
 import useFetch from '@hooks/useFetch';
-import { Chart } from '@common/chart';
-import { CategoryScale } from 'chart.js';
+import { Chart } from '@common/Chart';
 
 const PRODUCT_LIMIT = 60;
 const PRODUCT_OFFSET = 60;
@@ -12,18 +11,19 @@ export default function Dashboard() {
   const categoryNames = products?.map((product) => product.category);
   const categoryCount = categoryNames?.map((category) => category.name);
 
-  const countOcurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
+  const countOccurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
 
   const data = {
     datasets: [
       {
         label: 'Categories',
-        data: countOcurrences(categoryCount),
-        borderwidth: 2,
-        backgroundcolor: ['#ffbb11', '#c0c0c0', '#50AF95', '#f3ba2f', '#2a71d0'],
+        data: countOccurrences(categoryCount),
+        borderWidth: 2,
+        backgroundColor: ['#ffbb11', '#c0c0c0', '#50AF95', 'f3ba2f', '#2a71d0'],
       },
     ],
   };
+
   return (
     <>
       <Chart className="mb-8 mt-2" chartData={data} />
@@ -71,21 +71,16 @@ export default function Dashboard() {
                         <div className="text-sm text-gray-900">{product.category.name}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span
-                          className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                        bg-green-100 text-green-800"
-                        >
-                          ${product.price}
-                        </span>
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">${product.price}</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href=" /edit" className="text-indigo-600 hover:text-indigo-900">
+                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
                           Edit
                         </a>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href=" /edit" className="text-indigo-600 hover:text-indigo-900">
+                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
                           Delete
                         </a>
                       </td>
